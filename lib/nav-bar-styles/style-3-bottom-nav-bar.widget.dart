@@ -13,9 +13,9 @@ class BottomNavStyle3 extends StatelessWidget {
     bool isSelected,
     double? height,
   ) {
-    final Color? resolvedColor = isSelected
-        ? (item.activeColorSecondary ?? item.activeColorPrimary) as Color?
-        : item.inactiveColorPrimary as Color?;
+    // final Color? resolvedColor = isSelected
+    //     ? (item.activeColorSecondary ?? item.activeColorPrimary) as Color?
+    //     : item.inactiveColorPrimary as Color?;
 
     return this.navBarEssentials!.navBarHeight == 0
         ? SizedBox.shrink()
@@ -64,12 +64,13 @@ class BottomNavStyle3 extends StatelessWidget {
                           child: Material(
                             type: MaterialType.transparency,
                             child: DefaultTextStyle.merge(
-                              style: (item.textStyle ?? const TextStyle())
-                                  .copyWith(
-                                    color: resolvedColor,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 10.0,
-                                  ),
+                              style:
+                                  (item.textStyle ??
+                                          const TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 10.0,
+                                          ))
+                                      .copyWith(color: resolvedColor),
 
                               // style: TextStyle(
                               //   color: item.textStyle != null
