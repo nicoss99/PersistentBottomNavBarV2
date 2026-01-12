@@ -17,6 +17,10 @@ class BottomNavStyle3 extends StatelessWidget {
     //     ? (item.activeColorSecondary ?? item.activeColorPrimary) as Color?
     //     : item.inactiveColorPrimary as Color?;
 
+    final Color? resolvedColor = isSelected
+        ? (item.activeColorSecondary ?? item.activeColorPrimary)
+        : item.inactiveColorPrimary;
+
     return this.navBarEssentials!.navBarHeight == 0
         ? SizedBox.shrink()
         : AnimatedContainer(
