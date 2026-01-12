@@ -13,6 +13,10 @@ class BottomNavStyle3 extends StatelessWidget {
     bool isSelected,
     double? height,
   ) {
+    final Color? resolvedColor = isSelected
+        ? (item.activeColorSecondary ?? item.activeColorPrimary) as Color?
+        : item.inactiveColorPrimary as Color?;
+
     return this.navBarEssentials!.navBarHeight == 0
         ? SizedBox.shrink()
         : AnimatedContainer(
@@ -60,24 +64,31 @@ class BottomNavStyle3 extends StatelessWidget {
                           child: Material(
                             type: MaterialType.transparency,
                             child: DefaultTextStyle.merge(
-                              style: TextStyle(
-                                color: item.textStyle != null
-                                    ? item.textStyle!.apply(
-                                        color:
-                                            (isSelected
-                                                    ? (item.activeColorSecondary ??
-                                                          item.activeColorPrimary)
-                                                    : item.inactiveColorPrimary)
-                                                as Color?,
-                                      )
-                                    : isSelected
-                                    ? (item.activeColorSecondary == null
-                                          ? item.activeColorPrimary
-                                          : item.activeColorSecondary)
-                                    : item.inactiveColorPrimary,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 10.0,
-                              ),
+                              style: (item.textStyle ?? const TextStyle())
+                                  .copyWith(
+                                    color: resolvedColor,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 10.0,
+                                  ),
+
+                              // style: TextStyle(
+                              //   color: item.textStyle != null
+                              //       ? item.textStyle!.apply(
+                              //           color:
+                              //               (isSelected
+                              //                       ? (item.activeColorSecondary ??
+                              //                             item.activeColorPrimary)
+                              //                       : item.inactiveColorPrimary)
+                              //                   as Color?,
+                              //         )
+                              //       : isSelected
+                              //       ? (item.activeColorSecondary == null
+                              //             ? item.activeColorPrimary
+                              //             : item.activeColorSecondary)
+                              //       : item.inactiveColorPrimary,
+                              //   fontWeight: FontWeight.w500,
+                              //   fontSize: 10.0,
+                              // ),
                               child: FittedBox(child: Text(item.title!)),
                             ),
                           ),
